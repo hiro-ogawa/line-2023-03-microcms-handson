@@ -25,7 +25,7 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
   const router = useRouter()
   useEffect(() => {
     const { id } = router.query
-    if(!id)return ;
+    if (!id) return;
     client.get({
       endpoint: `staffs/${id}`
     }).then((content) => {
@@ -42,7 +42,7 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
     })
   }, [staff])
 
-  if(!staff || !reservations) {
+  if (!staff || !reservations) {
     return <></>
   }
   const workdays = staff.workdays.map((e) => new Date(e.workday));
@@ -74,7 +74,7 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
                 </TableCell>
                 {dates.map((workday) => {
                   return <TableCell key={`week-${workday.toISOString()}`}>
-                    {workday.getMonth()+1}/{workday.getDate()}({weekJp[workday.getDay()]})
+                    {workday.getMonth() + 1}/{workday.getDate()}({weekJp[workday.getDay()]})
                   </TableCell>
                 })}
               </TableRow>
@@ -100,15 +100,16 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
                                 <Button href={`/reservations/${reservation.id}`}>予約確認</Button> :
                                 '予約済み'
                             } */}
+
                             予約済み
                           </TableCell> :
                           <TableCell key={`week-${workday.toISOString()}-${hour}`} align='center'>
-                              <Button
-                                variant="text"
-                                onClick={() => { reserve(_date, staff.id, profile) }}
-                              >
-                                予約
-                              </Button>
+                            <Button
+                              variant="text"
+                              onClick={() => { reserve(_date, staff.id, profile) }}
+                            >
+                              予約
+                            </Button>
                           </TableCell> :
                         <TableCell key={`week-${workday.toISOString()}-${hour}`} sx={{ bgcolor: grey[500] }}>
                         </TableCell>
@@ -127,7 +128,7 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
               horizontal: 'right',
             }}
           >
-            <Alert onClose={()=>{setSnackMessage(undefined)}} severity="success">
+            <Alert onClose={() => { setSnackMessage(undefined) }} severity="success">
               {snackMessage}
             </Alert>
           </Snackbar>
